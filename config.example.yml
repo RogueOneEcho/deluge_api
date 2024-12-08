@@ -1,0 +1,5 @@
+host: "http://example.com:8112"
+password: YOUR_DELUGE_PASSWORD
+user_agent: rust_deluge_api
+rate_limit_count: 10
+rate_limit_duration: 10
