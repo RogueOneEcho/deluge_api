@@ -4,14 +4,14 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct ApiResponse<T> {
+pub struct Response<T> {
     pub status_code: Option<u16>,
     pub result: Option<T>,
     pub error: Option<Value>,
     pub id: Option<usize>,
 }
 
-impl<T: Serialize> ApiResponse<T> {
+impl<T: Serialize> Response<T> {
     /// Get the result
     ///
     /// Returns an error if:
