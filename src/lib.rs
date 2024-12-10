@@ -3,6 +3,7 @@ pub use factory::*;
 pub use options::*;
 pub use response::*;
 
+pub mod add_torrents;
 mod client;
 mod factory;
 pub mod get_host_status;
