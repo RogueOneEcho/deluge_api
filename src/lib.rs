@@ -2,6 +2,7 @@ pub use client::*;
 pub use factory::*;
 pub use options::*;
 pub use response::*;
+pub use state::*;
 
 pub mod add_torrents;
 mod client;

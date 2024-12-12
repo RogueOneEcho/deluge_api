@@ -1,5 +1,5 @@
 use crate::client::{deserialize_response, get_random_u32};
-use crate::state::State;
+use crate::State;
 use crate::{DelugeClient, Response};
 use rogue_logging::Error;
 use serde::{Deserialize, Serialize};
