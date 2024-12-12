@@ -23,9 +23,9 @@ impl DelugeClient {
 
 #[derive(Debug, Serialize)]
 pub struct Host {
-    id: String,
-    status: Status,
-    version: String,
+    pub id: String,
+    pub status: Status,
+    pub version: String,
 }
 
 impl<'de> Deserialize<'de> for Host {

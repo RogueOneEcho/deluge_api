@@ -46,12 +46,12 @@ pub struct FilterOptions {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Torrent {
-    label: String,
-    name: String,
-    progress: f64,
-    save_path: String,
-    state: State,
-    total_remaining: u64,
+    pub label: String,
+    pub name: String,
+    pub progress: f64,
+    pub save_path: String,
+    pub state: State,
+    pub total_remaining: u64,
 }
 
 #[cfg(test)]
