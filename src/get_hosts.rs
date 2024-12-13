@@ -30,17 +30,16 @@ pub struct Host {
 
 #[cfg(test)]
 mod tests {
-    use crate::DelugeClient;
+    use crate::{DelugeClient, DelugeClientOptions};
     use log::trace;
+    use rogue_config::{OptionsProvider, YamlOptionsProvider};
     use rogue_logging::{Error, Logger};
-
-    use crate::options::get_test_options;
 
     #[tokio::test]
     async fn get_hosts() -> Result<(), Error> {
         // Arrange
         Logger::force_init("deluge_api".to_owned());
-        let options = get_test_options()?;
+        let options: DelugeClientOptions = YamlOptionsProvider::get()?;
         let mut client = DelugeClient::from_options(options);
 
         // Act

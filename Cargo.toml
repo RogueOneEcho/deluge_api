@@ -26,6 +26,7 @@ serde_yaml = "0.9.34"
 tokio = { version = "^1", features = ["full"] }
 tower = { version = "^0.5", features = ["util", "limit"] }
 rand = "0.8.5"
+rogue_config = "0.1.0"
 
 [lints.clippy]
 pedantic = { level = "warn", priority = -1 }

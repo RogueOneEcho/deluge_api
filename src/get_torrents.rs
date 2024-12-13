@@ -57,16 +57,17 @@ pub struct Torrent {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::options::get_test_options;
     use crate::DelugeClient;
+    use crate::DelugeClientOptions;
     use log::trace;
+    use rogue_config::{OptionsProvider, YamlOptionsProvider};
     use rogue_logging::{Error, Logger};
 
     #[tokio::test]
     async fn get_torrents() -> Result<(), Error> {
         // Arrange
         Logger::force_init("deluge_api".to_owned());
-        let options = get_test_options()?;
+        let options: DelugeClientOptions = YamlOptionsProvider::get()?;
         let mut client = DelugeClient::from_options(options.clone());
         let filters = FilterOptions {
             label: Some(vec!["linux".to_owned()]),

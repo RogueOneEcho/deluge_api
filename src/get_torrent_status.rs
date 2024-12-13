@@ -56,24 +56,29 @@ pub struct Torrent {
 #[cfg(test)]
 mod tests {
     use crate::DelugeClient;
+    use crate::DelugeClientOptions;
     use log::trace;
+    use rogue_config::{OptionsProvider, YamlOptionsProvider};
     use rogue_logging::{Error, Logger};
+    use serde::Deserialize;
 
-    use crate::options::get_test_options;
+    #[derive(Debug, Deserialize)]
+    struct ExampleValues {
+        torrent_id: String,
+    }
 
     #[tokio::test]
     async fn get_torrent_status() -> Result<(), Error> {
         // Arrange
         Logger::force_init("deluge_api".to_owned());
-        let options = get_test_options()?;
+        let options: DelugeClientOptions = YamlOptionsProvider::get()?;
         let mut client = DelugeClient::from_options(options.clone());
+        let options: ExampleValues = YamlOptionsProvider::get()?;
 
         // Act
         let response = client.login().await?;
         trace!("{}", response.to_json_pretty());
-        let id = options
-            .torrent_id
-            .expect("example torrent_id should be set");
+        let id = options.torrent_id;
         let response = client.get_torrent_status(&id).await?;
         trace!("{}", response.to_json_pretty());
 

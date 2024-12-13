@@ -98,9 +98,10 @@ impl<'de> Deserialize<'de> for Torrent {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::options::get_test_options;
-    use crate::DelugeClient;
+    use crate::{DelugeClient, DelugeClientOptions};
     use log::trace;
+    use rogue_config::OptionsProvider;
+    use rogue_config::YamlOptionsProvider;
     use rogue_logging::{Error, Logger};
 
     #[tokio::test]
@@ -108,7 +109,7 @@ mod tests {
     async fn add_torrents() -> Result<(), Error> {
         // Arrange
         Logger::force_init("deluge_api".to_owned());
-        let options = get_test_options()?;
+        let options: DelugeClientOptions = YamlOptionsProvider::get()?;
         let mut client = DelugeClient::from_options(options.clone());
         let torrent = TorrentPath {
             path: "/srv/shared/tests/example-1.torrent".to_owned(),
