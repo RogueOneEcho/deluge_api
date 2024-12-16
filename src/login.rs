@@ -28,12 +28,12 @@ mod tests {
     use reqwest::cookie::CookieStore;
     use reqwest::Url;
     use rogue_config::{OptionsProvider, YamlOptionsProvider};
-    use rogue_logging::{Error, Logger};
+    use rogue_logging::{Error, LoggerBuilder};
 
     #[tokio::test]
     async fn login() -> Result<(), Error> {
         // Arrange
-        Logger::force_init("deluge_api".to_owned());
+        let _ = LoggerBuilder::new().create();
         let options: DelugeClientOptions = YamlOptionsProvider::get()?;
         let mut client = DelugeClient::from_options(options);
 

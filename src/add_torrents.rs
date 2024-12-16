@@ -102,13 +102,13 @@ mod tests {
     use log::trace;
     use rogue_config::OptionsProvider;
     use rogue_config::YamlOptionsProvider;
-    use rogue_logging::{Error, Logger};
+    use rogue_logging::{Error, LoggerBuilder};
 
     #[tokio::test]
     #[ignore]
     async fn add_torrents() -> Result<(), Error> {
         // Arrange
-        Logger::force_init("deluge_api".to_owned());
+        let _ = LoggerBuilder::new().create();
         let options: DelugeClientOptions = YamlOptionsProvider::get()?;
         let mut client = DelugeClient::from_options(options.clone());
         let torrent = TorrentPath {

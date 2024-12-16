@@ -67,12 +67,12 @@ mod tests {
     use crate::DelugeClientOptions;
     use log::trace;
     use rogue_config::{OptionsProvider, YamlOptionsProvider};
-    use rogue_logging::{Error, Logger};
+    use rogue_logging::{Error, LoggerBuilder};
 
     #[tokio::test]
     async fn get_interface() -> Result<(), Error> {
         // Arrange
-        Logger::force_init("deluge_api".to_owned());
+        let _ = LoggerBuilder::new().create();
         let options: DelugeClientOptions = YamlOptionsProvider::get()?;
         let mut client = DelugeClient::from_options(options.clone());
         let filters = FilterOptions {
